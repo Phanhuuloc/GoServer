@@ -24,7 +24,7 @@ func main() {
 	r := httprouter.New()
 	//r.GET("/", HomeHandler)
 	r.Handler("GET", "/", http.FileServer(http.Dir("public")))
-	r.HandlerFunc("GET", "/markdown", GenerateMarkdown)
+	r.HandlerFunc("POST", "/markdown", GenerateMarkdown)
 	// Posts collection
 	r.GET("/posts", PostsIndexHandler)
 	r.POST("/posts", PostsCreateHandler)
