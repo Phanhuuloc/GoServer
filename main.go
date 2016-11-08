@@ -22,11 +22,11 @@ func main() {
 
     r := httprouter.New()
     //r.GET("/", HomeHandler)
-
+    r.Handler("GET", "/", http.FileServer(http.Dir("public")))
     // Posts collection
     r.GET("/posts", PostsIndexHandler)
     r.POST("/posts", PostsCreateHandler)
-    r.Handler("GET", "/", http.FileServer(http.Dir("public")))
+
     // Posts singular
     r.GET("/posts/:id", PostShowHandler)
     r.PUT("/posts/:id", PostUpdateHandler)
