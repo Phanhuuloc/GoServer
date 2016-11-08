@@ -17,23 +17,23 @@ func main() {
         port = "8080"
     }
 
-    //http.HandleFunc("/markdown", GenerateMarkdown)
-    //http.Handle("/", http.FileServer(http.Dir("public")))
+    http.HandleFunc("/markdown", GenerateMarkdown)
+    http.Handle("/", http.FileServer(http.Dir("public")))
     //http.ListenAndServe(":"+port, nil)
 
-    r := httprouter.New()
-    //r.GET("/", HomeHandler)
-    r.Handler("GET", "/", http.FileServer(http.Dir("public")))
-    // Posts collection
-    r.GET("/posts", PostsIndexHandler)
-    r.POST("/posts", PostsCreateHandler)
-
-    // Posts singular
-    r.GET("/posts/:id", PostShowHandler)
-    r.PUT("/posts/:id", PostUpdateHandler)
-    r.GET("/posts/:id/edit", PostEditHandler)
-
-    fmt.Println("Starting server on :"+port)
+    //r := httprouter.New()
+    ////r.GET("/", HomeHandler)
+    //r.Handler("GET", "/", http.FileServer(http.Dir("public")))
+    //// Posts collection
+    //r.GET("/posts", PostsIndexHandler)
+    //r.POST("/posts", PostsCreateHandler)
+    //
+    //// Posts singular
+    //r.GET("/posts/:id", PostShowHandler)
+    //r.PUT("/posts/:id", PostUpdateHandler)
+    //r.GET("/posts/:id/edit", PostEditHandler)
+    //
+    //fmt.Println("Starting server on :"+port)
     http.ListenAndServe(":"+port, nil)
 }
 
