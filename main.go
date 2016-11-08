@@ -6,33 +6,33 @@ import (
 
     "github.com/russross/blackfriday"
     "github.com/julienschmidt/httprouter"
-    "os"
+    //"os"
 )
 
 func main() {
-    port := os.Getenv("PORT")
-    if port == "" {
-        port = "8080"
-    }
+    //port := os.Getenv("PORT")
+    //if port == "" {
+    //    port = "8080"
+    //}
+    //
+    //http.HandleFunc("/markdown", GenerateMarkdown)
+    //http.Handle("/", http.FileServer(http.Dir("public")))
+    //http.ListenAndServe(":"+port, nil)
 
-    http.HandleFunc("/markdown", GenerateMarkdown)
-    http.Handle("/", http.FileServer(http.Dir("public")))
-    http.ListenAndServe(":"+port, nil)
+    r := httprouter.New()
+    r.GET("/", HomeHandler)
 
-    //r := httprouter.New()
-    //r.GET("/", HomeHandler)
-    //
-    //// Posts collection
-    //r.GET("/posts", PostsIndexHandler)
-    //r.POST("/posts", PostsCreateHandler)
-    //
-    //// Posts singular
-    //r.GET("/posts/:id", PostShowHandler)
-    //r.PUT("/posts/:id", PostUpdateHandler)
-    //r.GET("/posts/:id/edit", PostEditHandler)
-    //
-    //fmt.Println("Starting server on :8080")
-    //http.ListenAndServe(":8080", r)
+    // Posts collection
+    r.GET("/posts", PostsIndexHandler)
+    r.POST("/posts", PostsCreateHandler)
+
+    // Posts singular
+    r.GET("/posts/:id", PostShowHandler)
+    r.PUT("/posts/:id", PostUpdateHandler)
+    r.GET("/posts/:id/edit", PostEditHandler)
+
+    fmt.Println("Starting server on :8080")
+    http.ListenAndServe(":8080", r)
 }
 
 func GenerateMarkdown(rw http.ResponseWriter, r *http.Request) {
