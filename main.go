@@ -6,6 +6,7 @@ import (
 
     "github.com/russross/blackfriday"
     "github.com/julienschmidt/httprouter"
+
     //"os"
 )
 
@@ -20,12 +21,12 @@ func main() {
     //http.ListenAndServe(":"+port, nil)
 
     r := httprouter.New()
-    r.GET("/", HomeHandler)
+    //r.GET("/", HomeHandler)
 
     // Posts collection
     r.GET("/posts", PostsIndexHandler)
     r.POST("/posts", PostsCreateHandler)
-
+    r.Handler("GET", "/", http.FileServer(http.Dir("public")))
     // Posts singular
     r.GET("/posts/:id", PostShowHandler)
     r.PUT("/posts/:id", PostUpdateHandler)
